@@ -5,7 +5,26 @@ const http = require("http");
 const port = 8080;
 
 //Cria o server
-const server = http.createServer();
+const server = http.createServer((req, res) => {
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+  };
+
+  if (req.method === "OPTIONS") {
+    res.writeHead(204, headers);
+    res.end();
+    return;
+  }
+
+  if (["GET", "POST"].indexOf(req.method) > -1) {
+    res.writeHead(200, headers);
+  }
+
+  res.writeHead(405, headers);
+  res.end(`${req.method} is not allowed for the request.`);
+});
 
 //Server irá escutar na porta definida em 'port'
 server.listen(port, () => {
@@ -36,7 +55,7 @@ wsServer.on("request", (request) => {
   });
 
   //Cria uma função que será executada a cada 1 segundo (1000 millis) para enviar o estado do led
-  let interval = setInterval(() => {
+  const interval = setInterval(() => {
     //Envia para o client "ON" ou "OFF" dependendo do estado atual da variável state
     client.sendUTF(state);
   }, intervalo); //Tempo entre chamadas => 1000 millis = 1 segundo
@@ -49,13 +68,9 @@ wsServer.on("request", (request) => {
   });
 });
 server.on("request", (request, response) => {
-  console.log(request.url);
-  if (request.url === "/liga") {
-    state = "ON";
-  }
-  if (request.url === "/desliga") {
-    state = "OFF";
-  }
-
+  request.on("data", (data) => {
+    const res = JSON.parse(data.toString("utf8"));
+    state = res.action;
+  });
   response.end();
 });
