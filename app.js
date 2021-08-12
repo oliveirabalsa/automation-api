@@ -10,6 +10,7 @@ const server = http.createServer((req, res) => {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Credentials": true,
   };
 
   if (req.method === "OPTIONS") {
