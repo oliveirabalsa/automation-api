@@ -2,7 +2,7 @@
 
 const char* ssid = "Multilaser_WS02"; // Nome da rede
 const char* password = "oliveira"; // Senha da rede
-const char* websockets_server_host = "192.168.0.105"; // IP do servidor websocket
+const char* websockets_server_host = "192.168.0.103"; // IP do servidor websocket
 const int websockets_server_port = 8080; // Porta de conexão do servidor
 
 // Utilizamos o namespace de websocket para podermos utilizar a classe WebsocketsClient

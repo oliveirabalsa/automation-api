@@ -1,0 +1,13 @@
+{
+    "quarto_casal": "QUARTO CASAL OFF",
+    "banheiro_casal": "BANHEIRO CASAL OFF",
+    "sala": "SALA OFF",
+    "quarto_visita": "QUARTO VISITA OFF",
+    "banheiro_visita": "BANHEIRO VISITA OFF",
+    "cozinha": "COZINHA OFF",
+    "lavanderia": "LAVANDERIA OFF",
+    "corredor": "CORREDOR OFF",
+    "response": {
+        "banheiro_casal": "BANHEIRO CASAL OFF"
+    }
+}

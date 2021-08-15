@@ -1,1 +1,9 @@
-Abra o prompt de comando e digite "npm install"
+ordem ligação
+
+
+1- banheiro casal
+2 - quarto casal
+3 - cozinha
+4 - quarto visita
+5 - sala
+6 - banheiro visita

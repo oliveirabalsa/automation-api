@@ -1,7 +1,10 @@
 const http = require("http");
-const WebSocketService = require("./src/services/WebSocketService");
-const express = require("express");
 const cors = require("cors");
+const express = require("express");
+const WebSocketService = require("./src/services/WebSocketService");
+const service = require("./src/services/MessageConverterService");
+const recovery = require('./src/files/recoveryState.json')
+
 const port = 8080;
 
 (async function bootstrap() {
@@ -14,10 +17,22 @@ const port = 8080;
   const webSocketService = new WebSocketService(server);
   webSocketService.connect();
 
-  app.post("/connect", async(req, res) => {
+  app.post("/connect", async (req, res) => {
     const { action } = req.body;
     await webSocketService.sendMessage(action);
-    res.send("OK")
+
+    console.log(action)
+
+    await service({
+        action,
+      }
+    );
+
+    res.send("OK");
+  });
+
+  app.get("/current-step", async (req, res) => {
+    res.status(200).json(recovery);
   });
   server.listen(port, () => {
     console.log(`Server listening on port ${port}`);
