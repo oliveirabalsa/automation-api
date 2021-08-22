@@ -6,6 +6,7 @@ const service = require("./src/services/MessageConverterService");
 const recovery = require('./src/files/recoveryState.json')
 
 const port = 8080;
+const host = '0.0.0.0'
 
 (async function bootstrap() {
   const app = express();
@@ -34,7 +35,7 @@ const port = 8080;
   app.get("/current-step", async (req, res) => {
     res.status(200).json(recovery);
   });
-  server.listen(port || 8080, 'localhost', () => {
+  server.listen(process.env.PORT || port, host, () => {
     console.log(`Server listening on port ${port}`);
   });
 })();
