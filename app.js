@@ -34,7 +34,7 @@ const port = 8080;
   app.get("/current-step", async (req, res) => {
     res.status(200).json(recovery);
   });
-  server.listen(port, () => {
+  server.listen(port || 8080, 'localhost', () => {
     console.log(`Server listening on port ${port}`);
   });
 })();
